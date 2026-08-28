@@ -6,178 +6,892 @@
 
     <title>Mafia State RP | FiveM Roleplay</title>
 
-    <meta
-        name="description"
-        content="Mafia State RP - Server FiveM Roleplay. La città è tua. Il rischio anche."
-    >
+    <meta name="description" content="Mafia State RP - FiveM Roleplay. La città è tua. Il rischio anche.">
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080808;
+            color: #f2f2f2;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           COLORI
+        ========================= */
+
+        :root {
+            --gold: #e5a91c;
+            --gold-light: #f2c14e;
+            --black: #080808;
+            --dark: #101010;
+            --dark2: #151515;
+            --white: #f5f5f5;
+            --gray: #a8a8a8;
+            --border: rgba(229, 169, 28, 0.45);
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 82px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+
+            background: rgba(7, 7, 7, 0.94);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+
+            backdrop-filter: blur(12px);
+
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-weight: 900;
+            font-size: 19px;
+            letter-spacing: 1px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 2px solid var(--gold);
+            color: var(--gold);
+
+            font-weight: 900;
+            font-size: 17px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        nav a {
+            color: #cfcfcf;
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+
+            transition: 0.25s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .discord-btn {
+            border: 1px solid var(--gold);
+            color: var(--gold) !important;
+
+            padding: 13px 20px;
+
+            transition: 0.25s;
+        }
+
+        .discord-btn:hover {
+            background: var(--gold);
+            color: #000 !important;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding: 130px 13% 80px;
+
+            position: relative;
+
+            background:
+                radial-gradient(
+                    circle at 75% 45%,
+                    rgba(229,169,28,0.08),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #0d0d0d
+                );
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+
+            background-size: 45px 45px;
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1250px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+
+            align-items: center;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            max-width: 650px;
+        }
+
+        .small-title {
+            color: var(--gold);
+
+            font-size: 13px;
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(52px, 6vw, 92px);
+
+            line-height: 0.95;
+
+            font-weight: 1000;
+
+            text-transform: uppercase;
+
+            letter-spacing: -3px;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--gold);
+        }
+
+        .hero-description {
+            margin-top: 42px;
+
+            max-width: 600px;
+
+            color: #bdbdbd;
+
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .hero-description strong {
+            display: block;
+
+            color: #fff;
+
+            margin-top: 20px;
+
+            font-size: 18px;
+        }
+
+        /* =========================
+           CATEGORY GRID
+        ========================= */
+
+        .categories {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            border: 1px solid var(--border);
+
+            background: rgba(0,0,0,0.3);
+        }
+
+        .category {
+            min-height: 170px;
+
+            padding: 30px;
+
+            border-right: 1px solid rgba(229,169,28,0.35);
+            border-bottom: 1px solid rgba(229,169,28,0.35);
+
+            cursor: pointer;
+
+            position: relative;
+
+            transition: 0.3s;
+
+            overflow: hidden;
+        }
+
+        .category:nth-child(2),
+        .category:nth-child(4) {
+            border-right: none;
+        }
+
+        .category:nth-child(3),
+        .category:nth-child(4) {
+            border-bottom: none;
+        }
+
+        .category::after {
+            content: "→";
+
+            position: absolute;
+
+            right: 25px;
+            bottom: 22px;
+
+            font-size: 25px;
+
+            color: var(--gold);
+
+            opacity: 0;
+
+            transform: translateX(-10px);
+
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            background: rgba(229,169,28,0.08);
+        }
+
+        .category:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .number {
+            color: var(--gold);
+
+            font-size: 43px;
+            font-weight: 1000;
+
+            margin-bottom: 17px;
+        }
+
+        .category h3 {
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            color: #cfcfcf;
+        }
+
+        .category p {
+            color: #777;
+
+            margin-top: 8px;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           SEZIONE CITTA
+        ========================= */
+
+        .section {
+            padding: 110px 10%;
+
+            border-top: 1px solid rgba(255,255,255,0.05);
+
+            background: #0b0b0b;
+        }
+
+        .section-header {
+            max-width: 800px;
+
+            margin-bottom: 55px;
+        }
+
+        .section-label {
+            color: var(--gold);
+
+            font-size: 12px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+        }
+
+        .section h2 {
+            font-size: 48px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            color: #999;
+
+            line-height: 1.7;
+
+            font-size: 17px;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .info-card {
+            background: #111;
+
+            border: 1px solid #242424;
+
+            padding: 35px;
+
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .info-card .icon {
+            font-size: 32px;
+
+            margin-bottom: 22px;
+        }
+
+        .info-card h3 {
+            margin-bottom: 12px;
+
+            font-size: 19px;
+        }
+
+        .info-card p {
+            color: #888;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.82);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 2000;
+
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 700px;
+
+            background: #111;
+
+            border: 1px solid var(--gold);
+
+            box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+
+            animation: modalIn 0.25s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 25px 30px;
+
+            border-bottom: 1px solid #292929;
+        }
+
+        .modal-header h2 {
+            color: var(--gold);
+
+            font-size: 25px;
+
+            text-transform: uppercase;
+        }
+
+        .close {
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid #444;
+
+            background: transparent;
+
+            color: #fff;
+
+            font-size: 22px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .close:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .modal-content {
+            padding: 30px;
+        }
+
+        .activity {
+            padding: 20px;
+
+            margin-bottom: 12px;
+
+            background: #171717;
+
+            border-left: 3px solid var(--gold);
+
+            transition: 0.2s;
+        }
+
+        .activity:hover {
+            background: #1d1d1d;
+        }
+
+        .activity h3 {
+            margin-bottom: 6px;
+        }
+
+        .activity p {
+            color: #888;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            padding: 100px 10%;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(229,169,28,0.08),
+                    transparent 55%
+                ),
+                #080808;
+
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cta h2 {
+            font-size: 48px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: #999;
+
+            max-width: 600px;
+
+            margin: 0 auto 30px;
+
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+
+            padding: 16px 30px;
+
+            border: 1px solid var(--gold);
+
+            color: var(--gold);
+
+            text-decoration: none;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            transition: 0.25s;
+        }
+
+        .cta-button:hover {
+            background: var(--gold);
+
+            color: #000;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 30px 7%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            border-top: 1px solid #1c1c1c;
+
+            background: #060606;
+
+            color: #666;
+
+            font-size: 12px;
+        }
+
+        footer strong {
+            color: var(--gold);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            header {
+                padding: 0 25px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            nav a:not(.discord-btn) {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 25px 70px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero h1 {
+                font-size: 60px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .logo {
+                font-size: 15px;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .category,
+            .category:nth-child(2),
+            .category:nth-child(3),
+            .category:nth-child(4) {
+                border-right: none;
+                border-bottom: 1px solid rgba(229,169,28,0.35);
+            }
+
+            .category:last-child {
+                border-bottom: none;
+            }
+
+            .section {
+                padding: 80px 25px;
+            }
+
+            .section h2,
+            .cta h2 {
+                font-size: 35px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- =========================
          HEADER
-    ========================== -->
+    ========================= -->
 
-    <header class="navbar">
+    <header>
 
-        <div class="nav-container">
+        <div class="logo">
+            <div class="logo-icon">M</div>
 
-            <!-- LOGO -->
-            <a href="#home" class="logo">
-                <span class="logo-box">M</span>
-
-                <span class="logo-text">
-                    MAFIA STATE <strong>RP</strong>
-                </span>
-            </a>
-
-
-            <!-- MENU -->
-            <nav class="nav-menu">
-
-                <a href="#home">HOME</a>
-
-                <a href="#citta">LA CITTÀ</a>
-
-                <a href="#fazioni">FAZIONI</a>
-
-                <a href="#shop">SHOP</a>
-
-                <a href="#entra">COME ENTRARE</a>
-
-                <a
-                    href="https://discord.gg/cUqYq37jj"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="discord-button"
-                >
-                    DISCORD ↗
-                </a>
-
-            </nav>
-
+            <div>
+                MAFIA STATE <span>RP</span>
+            </div>
         </div>
+
+        <nav>
+            <a href="#home">HOME</a>
+            <a href="#citta">LA CITTÀ</a>
+            <a href="#fazioni">FAZIONI</a>
+            <a href="#shop">SHOP</a>
+            <a href="#entra">COME ENTRARE</a>
+
+            <a
+                href="https://discord.gg/"
+                target="_blank"
+                class="discord-btn"
+            >
+                DISCORD ↗
+            </a>
+        </nav>
 
     </header>
 
 
     <!-- =========================
          HERO
-    ========================== -->
+    ========================= -->
 
-    <main>
+    <main id="home">
 
-        <section id="home" class="hero">
+        <section class="hero">
 
-            <div class="hero-container">
+            <div class="hero-content">
 
+                <div class="hero-text">
 
-                <!-- PARTE SINISTRA -->
-                <div class="hero-content">
-
-                    <div class="eyebrow">
+                    <div class="small-title">
                         FIVE M ROLEPLAY
                     </div>
 
-
                     <h1>
-                        LA CITTÀ<br>
-                        È TUA.
-                        <span>IL RISCHIO<br>ANCHE.</span>
+                        LA CITTÀ È TUA.
+                        <span>IL RISCHIO ANCHE.</span>
                     </h1>
 
+                    <div class="hero-description">
 
-                    <p class="hero-description">
-                        Mafia State RP nasce per offrirti un'esperienza
-                        FiveM moderna, competitiva e piena di possibilità.
-                        Puoi costruire un impero, lavorare onestamente,
-                        entrare nel mondo criminale o creare la tua strada.
-                    </p>
+                        Mafia State RP nasce per offrirti
+                        un'esperienza FiveM moderna,
+                        competitiva e piena di possibilità.
 
+                        Puoi costruire un impero,
+                        lavorare onestamente,
+                        entrare nel mondo criminale
+                        o creare la tua strada.
 
-                    <p class="hero-highlight">
-                        Qui non esiste una sola storia.
-                        <strong>Esiste la tua.</strong>
-                    </p>
+                        <strong>
+                            Qui non esiste una sola storia.
+                            Esiste la tua.
+                        </strong>
+
+                    </div>
 
                 </div>
 
 
-                <!-- PARTE DESTRA -->
+                <!-- CATEGORIE -->
+
                 <div class="categories">
 
                     <!-- 01 -->
-                    <a href="#fazioni" class="category-card">
 
-                        <span class="category-number">
+                    <div
+                        class="category"
+                        onclick="openCategory('mafia')"
+                    >
+
+                        <div class="number">
                             01
-                        </span>
+                        </div>
 
-                        <h2>
-                            MAFIE &amp; GANG
-                        </h2>
+                        <h3>
+                            MAFIE & GANG
+                        </h3>
 
                         <p>
                             Organizzazioni e criminalità
                         </p>
 
-                    </a>
+                    </div>
 
 
-                    <!-- 02 -->
-                    <a href="#armerie" class="category-card">
+                    <!-- 02 ARMERIE -->
 
-                        <span class="category-number">
+                    <div
+                        class="category"
+                        onclick="openCategory('armerie')"
+                    >
+
+                        <div class="number">
                             02
-                        </span>
+                        </div>
 
-                        <h2>
+                        <h3>
                             ARMERIE
-                        </h2>
+                        </h3>
 
                         <p>
                             Armi e attrezzature
                         </p>
 
-                    </a>
+                    </div>
 
 
                     <!-- 03 -->
-                    <a href="#officine" class="category-card">
 
-                        <span class="category-number">
+                    <div
+                        class="category"
+                        onclick="openCategory('officine')"
+                    >
+
+                        <div class="number">
                             03
-                        </span>
+                        </div>
 
-                        <h2>
+                        <h3>
                             OFFICINE
-                        </h2>
+                        </h3>
 
                         <p>
                             Veicoli e personalizzazioni
                         </p>
 
-                    </a>
+                    </div>
 
 
                     <!-- 04 -->
-                    <a href="#ristoranti" class="category-card">
 
-                        <span class="category-number">
+                    <div
+                        class="category"
+                        onclick="openCategory('ristoranti')"
+                    >
+
+                        <div class="number">
                             04
-                        </span>
+                        </div>
 
-                        <h2>
-                            BAR &amp; RISTORANTI
-                        </h2>
+                        <h3>
+                            BAR & RISTORANTI
+                        </h3>
 
                         <p>
                             Locali e attività cittadine
                         </p>
 
-                    </a>
+                    </div>
 
                 </div>
 
@@ -188,27 +902,89 @@
 
         <!-- =========================
              LA CITTÀ
-        ========================== -->
+        ========================= -->
 
-        <section id="citta" class="content-section">
+        <section
+            class="section"
+            id="citta"
+        >
 
-            <div class="section-container">
+            <div class="section-header">
 
                 <div class="section-label">
                     LA CITTÀ
                 </div>
 
                 <h2>
-                    UNA CITTÀ.<br>
-                    INFINITE STORIE.
+                    Costruisci la tua storia.
                 </h2>
 
                 <p>
-                    Mafia State RP è una città viva dove ogni giocatore
-                    può costruire il proprio percorso.
-                    Il tuo lavoro, le tue amicizie, le tue scelte
-                    e le tue azioni determineranno la tua storia.
+                    Una città viva, dove ogni scelta può
+                    cambiare il tuo percorso. Lavora,
+                    investi, crea la tua attività o
+                    entra nel mondo criminale.
                 </p>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="info-card">
+
+                    <div class="icon">
+                        💼
+                    </div>
+
+                    <h3>
+                        Lavori
+                    </h3>
+
+                    <p>
+                        Inizia dal basso, trova un lavoro
+                        e costruisci il tuo patrimonio.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="icon">
+                        🏢
+                    </div>
+
+                    <h3>
+                        Attività
+                    </h3>
+
+                    <p>
+                        Crea e gestisci attività,
+                        locali e imprese all'interno
+                        della città.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="icon">
+                        🔥
+                    </div>
+
+                    <h3>
+                        Criminalità
+                    </h3>
+
+                    <p>
+                        Entra nelle organizzazioni,
+                        conquista territori e costruisci
+                        il tuo impero.
+                    </p>
+
+                </div>
 
             </div>
 
@@ -217,108 +993,86 @@
 
         <!-- =========================
              FAZIONI
-        ========================== -->
+        ========================= -->
 
-        <section id="fazioni" class="content-section dark-section">
+        <section
+            class="section"
+            id="fazioni"
+        >
 
-            <div class="section-container">
+            <div class="section-header">
 
                 <div class="section-label">
                     FAZIONI
                 </div>
 
                 <h2>
-                    SCEGLI<br>
-                    DA CHE PARTE STARE.
+                    Scegli da che parte stare.
                 </h2>
 
                 <p>
-                    Entra in una fazione, crea il tuo gruppo
-                    oppure costruisci la tua organizzazione.
-                    La città ha spazio per tutti.
+                    Polizia, organizzazioni criminali,
+                    attività civili e molto altro.
+                    Ogni fazione ha il proprio ruolo
+                    e le proprie regole.
                 </p>
 
             </div>
 
-        </section>
+            <div class="cards">
 
+                <div class="info-card">
 
-        <!-- =========================
-             ARMERIE
-        ========================== -->
+                    <div class="icon">
+                        🛡️
+                    </div>
 
-        <section id="armerie" class="content-section">
+                    <h3>
+                        Forze dell'ordine
+                    </h3>
 
-            <div class="section-container">
+                    <p>
+                        Difendi la città e fai rispettare
+                        la legge.
+                    </p>
 
-                <div class="section-label">
-                    ARMERIE
                 </div>
 
-                <h2>
-                    EQUIPAGGIATI.<br>
-                    PREPARATI.
-                </h2>
 
-                <p>
-                    Scopri le armerie disponibili nella città
-                    e tutto ciò che serve per affrontare
-                    le situazioni più pericolose.
-                </p>
+                <div class="info-card">
 
-            </div>
+                    <div class="icon">
+                        🕶️
+                    </div>
 
-        </section>
+                    <h3>
+                        Mafia & Gang
+                    </h3>
 
+                    <p>
+                        Crea alleanze, conquista territori
+                        e scala il mondo criminale.
+                    </p>
 
-        <!-- =========================
-             OFFICINE
-        ========================== -->
-
-        <section id="officine" class="content-section dark-section">
-
-            <div class="section-container">
-
-                <div class="section-label">
-                    OFFICINE
                 </div>
 
-                <h2>
-                    LA TUA AUTO.<br>
-                    IL TUO STILE.
-                </h2>
 
-                <p>
-                    Porta il tuo veicolo in officina,
-                    personalizzalo e rendilo unico.
-                </p>
+                <div class="info-card">
 
-            </div>
+                    <div class="icon">
+                        🏙️
+                    </div>
 
-        </section>
+                    <h3>
+                        Civili
+                    </h3>
 
+                    <p>
+                        Costruisci la tua vita e diventa
+                        protagonista della città.
+                    </p>
 
-        <!-- =========================
-             BAR & RISTORANTI
-        ========================== -->
-
-        <section id="ristoranti" class="content-section">
-
-            <div class="section-container">
-
-                <div class="section-label">
-                    BAR &amp; RISTORANTI
                 </div>
-
-                <h2>
-                    LA CITTÀ<br>
-                    NON DORME MAI.
-                </h2>
-
-                <p>
-                    Locali, ristoranti e attività cittadine
-                    fanno vivere la città giorno e notte.
-                </p>
 
             </div>
 
@@ -327,24 +1081,28 @@
 
         <!-- =========================
              SHOP
-        ========================== -->
+        ========================= -->
 
-        <section id="shop" class="content-section dark-section">
+        <section
+            class="section"
+            id="shop"
+        >
 
-            <div class="section-container">
+            <div class="section-header">
 
                 <div class="section-label">
                     SHOP
                 </div>
 
                 <h2>
-                    SUPPORTA<br>
-                    LA CITTÀ.
+                    Porta la tua esperienza
+                    al livello successivo.
                 </h2>
 
                 <p>
-                    Scopri lo shop di Mafia State RP
-                    e tutti i contenuti disponibili.
+                    Lo shop sarà il punto dedicato
+                    agli eventuali contenuti e
+                    vantaggi disponibili per la community.
                 </p>
 
             </div>
@@ -354,38 +1112,29 @@
 
         <!-- =========================
              COME ENTRARE
-        ========================== -->
+        ========================= -->
 
-        <section id="entra" class="content-section">
+        <section
+            class="cta"
+            id="entra"
+        >
 
-            <div class="section-container">
+            <h2>
+                Sei pronto?
+            </h2>
 
-                <div class="section-label">
-                    COME ENTRARE
-                </div>
+            <p>
+                Entra nella community Mafia State RP
+                e inizia a costruire la tua storia.
+            </p>
 
-                <h2>
-                    LA TUA STORIA<br>
-                    INIZIA QUI.
-                </h2>
-
-                <p>
-                    Entra nel nostro Discord per ricevere
-                    tutte le informazioni necessarie
-                    e scoprire come iniziare a giocare.
-                </p>
-
-
-                <a
-                    href="https://discord.gg/cUqYq37jj"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="main-discord-button"
-                >
-                    ENTRA NEL DISCORD ↗
-                </a>
-
-            </div>
+            <a
+                href="https://discord.gg/"
+                target="_blank"
+                class="cta-button"
+            >
+                ENTRA NEL DISCORD ↗
+            </a>
 
         </section>
 
@@ -394,34 +1143,263 @@
 
     <!-- =========================
          FOOTER
-    ========================== -->
+    ========================= -->
 
-    <footer class="footer">
+    <footer>
 
-        <div class="footer-container">
+        <div>
+            © 2026 Mafia State RP
+        </div>
 
-            <div class="footer-logo">
-                MAFIA STATE <strong>RP</strong>
-            </div>
-
-            <p>
-                © 2026 Mafia State RP. Tutti i diritti riservati.
-            </p>
-
-            <a
-                href="https://discord.gg/cUqYq37jj"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                DISCORD ↗
-            </a>
-
+        <div>
+            <strong>MAFIA STATE RP</strong>
+            — FiveM Roleplay
         </div>
 
     </footer>
 
 
-    <script src="script.js"></script>
+    <!-- =========================
+         MODAL
+    ========================= -->
+
+    <div
+        class="modal"
+        id="categoryModal"
+        onclick="closeOutside(event)"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+
+                <h2 id="modalTitle">
+                    Categoria
+                </h2>
+
+                <button
+                    class="close"
+                    onclick="closeCategory()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="modal-content"
+                id="modalContent"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const categories = {
+
+            mafia: {
+
+                title: "MAFIE & GANG",
+
+                activities: [
+
+                    {
+                        name: "Organizzazioni criminali",
+                        description:
+                        "Entra in una famiglia criminale e costruisci la tua reputazione."
+                    },
+
+                    {
+                        name: "Gang",
+                        description:
+                        "Crea la tua gang, stringi alleanze e conquista il territorio."
+                    },
+
+                    {
+                        name: "Attività illegali",
+                        description:
+                        "Affronta il lato più oscuro della città."
+                    }
+
+                ]
+
+            },
+
+
+            armerie: {
+
+                title: "ARMERIE",
+
+                activities: [
+
+                    {
+                        name: "Armerie autorizzate",
+                        description:
+                        "Scopri i punti vendita dedicati all'equipaggiamento."
+                    },
+
+                    {
+                        name: "Equipaggiamento",
+                        description:
+                        "Preparati con l'attrezzatura disponibile nel server."
+                    },
+
+                    {
+                        name: "Sicurezza",
+                        description:
+                        "Ogni acquisto e utilizzo deve rispettare le regole del server."
+                    }
+
+                ]
+
+            },
+
+
+            officine: {
+
+                title: "OFFICINE",
+
+                activities: [
+
+                    {
+                        name: "Officine cittadine",
+                        description:
+                        "Ripara e modifica i tuoi veicoli."
+                    },
+
+                    {
+                        name: "Personalizzazione",
+                        description:
+                        "Rendi il tuo veicolo unico."
+                    },
+
+                    {
+                        name: "Meccanici",
+                        description:
+                        "Affidati ai professionisti della città."
+                    }
+
+                ]
+
+            },
+
+
+            ristoranti: {
+
+                title: "BAR & RISTORANTI",
+
+                activities: [
+
+                    {
+                        name: "Bar",
+                        description:
+                        "Rilassati e incontra altri cittadini."
+                    },
+
+                    {
+                        name: "Ristoranti",
+                        description:
+                        "Scopri i locali presenti nella città."
+                    },
+
+                    {
+                        name: "Attività",
+                        description:
+                        "Gestisci o lavora all'interno dei locali."
+                    }
+
+                ]
+
+            }
+
+        };
+
+
+        function openCategory(category) {
+
+            const data = categories[category];
+
+            if (!data) return;
+
+            document.getElementById("modalTitle").textContent =
+                data.title;
+
+            const content =
+                document.getElementById("modalContent");
+
+            content.innerHTML = "";
+
+            data.activities.forEach(activity => {
+
+                const div =
+                    document.createElement("div");
+
+                div.className = "activity";
+
+                div.innerHTML = `
+                    <h3>${activity.name}</h3>
+                    <p>${activity.description}</p>
+                `;
+
+                content.appendChild(div);
+
+            });
+
+            document
+                .getElementById("categoryModal")
+                .classList.add("active");
+
+            document.body.style.overflow = "hidden";
+        }
+
+
+        function closeCategory() {
+
+            document
+                .getElementById("categoryModal")
+                .classList.remove("active");
+
+            document.body.style.overflow = "";
+        }
+
+
+        function closeOutside(event) {
+
+            if (
+                event.target ===
+                document.getElementById("categoryModal")
+            ) {
+
+                closeCategory();
+
+            }
+
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    closeCategory();
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
