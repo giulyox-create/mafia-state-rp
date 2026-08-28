@@ -6,7 +6,10 @@
 
     <title>Mafia State RP | FiveM Roleplay</title>
 
-    <meta name="description" content="Mafia State RP - FiveM Roleplay. La città è tua. Il rischio anche.">
+    <meta
+        name="description"
+        content="Mafia State RP - FiveM Roleplay. La città è tua. Il rischio anche."
+    >
 
     <style>
         * {
@@ -22,22 +25,18 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: #080808;
-            color: #f2f2f2;
+            color: #f5f5f5;
             overflow-x: hidden;
         }
-
-        /* =========================
-           COLORI
-        ========================= */
 
         :root {
             --gold: #e5a91c;
             --gold-light: #f2c14e;
             --black: #080808;
-            --dark: #101010;
-            --dark2: #151515;
+            --dark: #0d0d0d;
+            --dark2: #111111;
             --white: #f5f5f5;
-            --gray: #a8a8a8;
+            --gray: #999999;
             --border: rgba(229, 169, 28, 0.45);
         }
 
@@ -58,7 +57,7 @@
 
             padding: 0 5%;
 
-            background: rgba(7, 7, 7, 0.94);
+            background: rgba(7, 7, 7, 0.96);
             border-bottom: 1px solid rgba(255,255,255,0.06);
 
             backdrop-filter: blur(12px);
@@ -74,11 +73,12 @@
             font-weight: 900;
             font-size: 19px;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         .logo-icon {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
 
             display: flex;
             align-items: center;
@@ -98,18 +98,18 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 30px;
         }
 
         nav a {
-            color: #cfcfcf;
+            color: #d0d0d0;
             text-decoration: none;
 
             font-size: 13px;
             font-weight: 800;
             letter-spacing: 0.7px;
 
-            transition: 0.25s;
+            transition: 0.25s ease;
         }
 
         nav a:hover {
@@ -120,9 +120,9 @@
             border: 1px solid var(--gold);
             color: var(--gold) !important;
 
-            padding: 13px 20px;
+            padding: 14px 21px;
 
-            transition: 0.25s;
+            transition: 0.25s ease;
         }
 
         .discord-btn:hover {
@@ -140,7 +140,7 @@
             display: flex;
             align-items: center;
 
-            padding: 130px 13% 80px;
+            padding: 125px 13% 80px;
 
             position: relative;
 
@@ -164,8 +164,15 @@
             inset: 0;
 
             background-image:
-                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+                linear-gradient(
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                );
 
             background-size: 45px 45px;
 
@@ -175,11 +182,13 @@
         .hero-content {
             width: 100%;
             max-width: 1250px;
+
             margin: auto;
 
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 70px;
+
+            gap: 65px;
 
             align-items: center;
 
@@ -188,7 +197,7 @@
         }
 
         .hero-text {
-            max-width: 650px;
+            max-width: 610px;
         }
 
         .small-title {
@@ -203,15 +212,15 @@
         }
 
         .hero h1 {
-            font-size: clamp(52px, 6vw, 92px);
+            font-size: clamp(48px, 5.5vw, 78px);
 
-            line-height: 0.95;
+            line-height: 0.96;
 
             font-weight: 1000;
 
             text-transform: uppercase;
 
-            letter-spacing: -3px;
+            letter-spacing: -2px;
         }
 
         .hero h1 span {
@@ -220,13 +229,13 @@
         }
 
         .hero-description {
-            margin-top: 42px;
+            margin-top: 38px;
 
-            max-width: 600px;
+            max-width: 590px;
 
             color: #bdbdbd;
 
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.7;
         }
 
@@ -237,11 +246,11 @@
 
             margin-top: 20px;
 
-            font-size: 18px;
+            font-size: 17px;
         }
 
         /* =========================
-           CATEGORY GRID
+           CATEGORIE
         ========================= */
 
         .categories {
@@ -251,13 +260,13 @@
 
             border: 1px solid var(--border);
 
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.35);
         }
 
         .category {
-            min-height: 170px;
+            min-height: 185px;
 
-            padding: 30px;
+            padding: 32px;
 
             border-right: 1px solid rgba(229,169,28,0.35);
             border-bottom: 1px solid rgba(229,169,28,0.35);
@@ -266,9 +275,7 @@
 
             position: relative;
 
-            transition: 0.3s;
-
-            overflow: hidden;
+            transition: 0.3s ease;
         }
 
         .category:nth-child(2),
@@ -281,6 +288,10 @@
             border-bottom: none;
         }
 
+        .category:hover {
+            background: rgba(229,169,28,0.08);
+        }
+
         .category::after {
             content: "→";
 
@@ -289,19 +300,15 @@
             right: 25px;
             bottom: 22px;
 
-            font-size: 25px;
-
             color: var(--gold);
+
+            font-size: 25px;
 
             opacity: 0;
 
             transform: translateX(-10px);
 
-            transition: 0.3s;
-        }
-
-        .category:hover {
-            background: rgba(229,169,28,0.08);
+            transition: 0.3s ease;
         }
 
         .category:hover::after {
@@ -323,19 +330,19 @@
 
             letter-spacing: 2px;
 
-            color: #cfcfcf;
+            color: #d2d2d2;
         }
 
         .category p {
             color: #777;
 
-            margin-top: 8px;
+            margin-top: 9px;
 
             font-size: 12px;
         }
 
         /* =========================
-           SEZIONE CITTA
+           SEZIONI
         ========================= */
 
         .section {
@@ -364,7 +371,7 @@
         }
 
         .section h2 {
-            font-size: 48px;
+            font-size: 46px;
 
             text-transform: uppercase;
 
@@ -398,7 +405,7 @@
 
             padding: 35px;
 
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
 
         .info-card:hover {
@@ -432,10 +439,9 @@
 
         .modal {
             position: fixed;
-
             inset: 0;
 
-            background: rgba(0,0,0,0.82);
+            background: rgba(0,0,0,0.84);
 
             display: none;
 
@@ -549,7 +555,7 @@
         }
 
         /* =========================
-           CTA
+           CTA DISCORD
         ========================= */
 
         .cta {
@@ -589,7 +595,7 @@
         .cta-button {
             display: inline-block;
 
-            padding: 16px 30px;
+            padding: 17px 32px;
 
             border: 1px solid var(--gold);
 
@@ -601,12 +607,11 @@
 
             letter-spacing: 1px;
 
-            transition: 0.25s;
+            transition: 0.25s ease;
         }
 
         .cta-button:hover {
             background: var(--gold);
-
             color: #000;
         }
 
@@ -663,7 +668,7 @@
             }
 
             .hero h1 {
-                font-size: 60px;
+                font-size: 58px;
             }
 
             .cards {
@@ -682,9 +687,13 @@
                 height: 32px;
             }
 
+            .discord-btn {
+                padding: 11px 14px;
+            }
+
             .hero h1 {
-                font-size: 45px;
-                letter-spacing: -2px;
+                font-size: 43px;
+                letter-spacing: -1.5px;
             }
 
             .hero-description {
@@ -734,34 +743,56 @@
     <header>
 
         <div class="logo">
-            <div class="logo-icon">M</div>
+
+            <div class="logo-icon">
+                M
+            </div>
 
             <div>
                 MAFIA STATE <span>RP</span>
             </div>
+
         </div>
 
         <nav>
-            <a href="#home">HOME</a>
-            <a href="#citta">LA CITTÀ</a>
-            <a href="#fazioni">FAZIONI</a>
-            <a href="#shop">SHOP</a>
-            <a href="#entra">COME ENTRARE</a>
 
+            <a href="#home">
+                HOME
+            </a>
+
+            <a href="#citta">
+                LA CITTÀ
+            </a>
+
+            <a href="#fazioni">
+                FAZIONI
+            </a>
+
+            <a href="#shop">
+                SHOP
+            </a>
+
+            <a href="#entra">
+                COME ENTRARE
+            </a>
+
+            <!-- DISCORD CORRETTO -->
             <a
-                href="https://discord.gg/"
+                href="https://discord.gg/cUqYq37jj"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="discord-btn"
             >
                 DISCORD ↗
             </a>
+
         </nav>
 
     </header>
 
 
     <!-- =========================
-         HERO
+         HOME / HERO
     ========================= -->
 
     <main id="home">
@@ -828,7 +859,7 @@
                     </div>
 
 
-                    <!-- 02 ARMERIE -->
+                    <!-- 02 -->
 
                     <div
                         class="category"
@@ -1019,6 +1050,7 @@
 
             </div>
 
+
             <div class="cards">
 
                 <div class="info-card">
@@ -1120,7 +1152,7 @@
         >
 
             <h2>
-                Sei pronto?
+                SEI PRONTO?
             </h2>
 
             <p>
@@ -1128,9 +1160,13 @@
                 e inizia a costruire la tua storia.
             </p>
 
+
+            <!-- DISCORD CORRETTO -->
+
             <a
-                href=https://discord.gg/cUqYq37jj
+                href="https://discord.gg/cUqYq37jj"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="cta-button"
             >
                 ENTRA NEL DISCORD ↗
@@ -1152,7 +1188,9 @@
         </div>
 
         <div>
-            <strong>MAFIA STATE RP</strong>
+            <strong>
+                MAFIA STATE RP
+            </strong>
             — FiveM Roleplay
         </div>
 
@@ -1160,7 +1198,7 @@
 
 
     <!-- =========================
-         MODAL
+         MODALE CATEGORIE
     ========================= -->
 
     <div
@@ -1391,9 +1429,7 @@
             function(event) {
 
                 if (event.key === "Escape") {
-
                     closeCategory();
-
                 }
 
             }
